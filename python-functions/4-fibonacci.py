@@ -7,4 +7,3 @@ def fibonacci_sequence(n):
         return 1
     else:
         return fibonacci_sequence(n-1) + fibonacci_sequence(n-2)
-    
