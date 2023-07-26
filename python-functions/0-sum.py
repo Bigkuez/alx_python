@@ -1,2 +1,2 @@
-# Display the massage 
-print('"Programming is like building a multilingual puzzle')
+def add(a, b):
+    return a + b
