@@ -1,3 +1,7 @@
 def square_matrix_simple(matrix=[]):
-    new_matrix = [[x ** 2 for x in row] for row in matrix]
+    new_matrix = []
+    for row in matrix:
+        new_row = [element**2 for element in row]
+        new_matrix.append(new_row)
     return new_matrix
+
