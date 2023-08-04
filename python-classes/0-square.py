@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
-    Represents a square.
+    This module Represents a square.
 """
 class Square:
     """
-    Represents a square.
+    This Represents a square.
 
     Attributes:
         __size (int): The size of the square.
