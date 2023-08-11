@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Uses requests module -- yay"""
+""" Uses requests module"""
 import requests
 
 if __name__ == "__main__":
