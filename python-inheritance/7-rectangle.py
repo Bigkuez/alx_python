@@ -1,24 +1,89 @@
 #!/usr/bin/python3
-"""Module consists of a Rectangle class that
-inherits from BaseGeometry.
 """
-BaseGeometry = __import__('5-base_geometry.py').BaseGeometry
+    Represents a BaseGeometry.
+"""
+class BaseGeometry:
+    # ... (previous implementation of BaseGeometry)
+
+    def area(self):
+        """
+        Calculate the area of the geometry.
+
+        This method is not implemented in the base class and should be overridden
+        in the derived classes.
+
+        Raises:
+            Exception: Indicates that the method is not implemented.
+
+        Returns:
+            None
+        """
+        raise Exception("area() is not implemented")
+
+    def integer_validator(self, name, value):
+        """
+        Validate the given value as an integer and greater than 0.
+
+        Args:
+            name (str): The name of the value, used in the error message.
+            value (int): The value to be validated.
+
+        Raises:
+            TypeError: If the value is not an integer.
+            ValueError: If the value is less than or equal to 0.
+        """
+        if not isinstance(value, int):
+            raise TypeError(f"{name} must be an integer")
+        if value <= 0:
+            raise ValueError(f"{name} must be greater than 0")
 
 
 class Rectangle(BaseGeometry):
-    """class that inherits from BaseGeometry."""
+    """
+    A class representing a rectangle.
+
+    Attributes:
+        __width (int): The width of the rectangle.
+        __height (int): The height of the rectangle.
+
+    Methods:
+        None (inherits the methods from BaseGeometry).
+
+    Example:
+        r = Rectangle(3, 5)
+        print(r)
+    """
     def __init__(self, width, height):
-        """Initializing the class."""
+        """
+        Initialize the Rectangle instance with width and height.
+
+        Args:
+            width (int): The width of the rectangle.
+            height (int): The height of the rectangle.
+
+        Raises:
+            TypeError: If width or height is not an integer.
+            ValueError: If width or height is less than or equal to 0.
+        """
         self.__width = width
         self.__height = height
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
+        self.integer_validator("width", self.__width)
+        self.integer_validator("height", self.__height)
 
     def area(self):
-        """Method that returns the area of the instance. """
+        """
+        Calculate the area of the rectangle.
+
+        Returns:
+            int: The area of the rectangle (width * height).
+        """
         return self.__width * self.__height
 
     def __str__(self):
-        """Special method that returns the printable string. """
-        return "[Rectangle] {:d}/{:d}".format(self.__width, self.__height)
-    
+        """
+        Return a string representation of the rectangle.
+
+        Returns:
+            str: A string representation of the rectangle in the format "[Rectangle] <width>/<height>".
+        """
+        return f"[Rectangle] {self.__width}/{self.__height}"
