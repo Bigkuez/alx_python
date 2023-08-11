@@ -1,22 +1,37 @@
 #!/usr/bin/python3
 """
-- The letter is sent as the value of the variable `q`.
-  - If no letter is provided, sends `q=""`.
+    search_user a URL.
 """
-import sys
 import requests
+import sys
+"""
+    search_user a URL.
+"""
+def search_user(letter):
+    """
+    Sends a POST request to http://0.0.0.0:5000/search_user with the provided letter as a parameter.
 
+
+    """
+    url = "http://0.0.0.0:5000/search_user"
+    data = {'q': letter}
+    
+    try:
+        response = requests.post(url, data=data)
+        try:
+            json_data = response.json()
+            if json_data:
+                print(f"[{json_data['id']}] {json_data['name']}")
+            else:
+                print("No result")
+        except ValueError:
+            print("Not a valid JSON")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    letter = "" if len(sys.argv) == 1 else sys.argv[1]
-    payload = {"q": letter}
-
-    r = requests.post("http://0.0.0.0:5000/search_user", data=payload)
-    try:
-        response = r.json()
-        if response == {}:
-            print("No result")
-        else:
-            print("[{}] {}".format(response.get("id"), response.get("name")))
-    except ValueError:
-        print("Not a valid JSON")
+    if len(sys.argv) == 2:
+        letter = sys.argv[1]
+    else:
+        letter = ""
+    search_user(letter)
