@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Represents a Base.
+    Thisepresents a Base.
 """
 from models.base import Base
 """
@@ -67,9 +67,6 @@ class Rectangle(Base):
     def area(self):
         """
         Calculate and return the area of the Rectangle.
-
-        Returns:
-            int: The calculated area.
         """
         return self.width * self.height
 
@@ -77,9 +74,6 @@ class Rectangle(Base):
         """
         Display the Rectangle instance as a series of '#' characters
         representing its dimensions on the standard output.
-
-        The display considers the 'x' and 'y' offsets, shifting the
-        position of the rectangle.
         """
         for _ in range(self.y):
             print()
@@ -89,9 +83,6 @@ class Rectangle(Base):
     def __str__(self):
         """
         Return a string representation of the Rectangle instance.
-
-        Returns:
-            str: The formatted string representing the Rectangle.
         """
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.x, self.y, self.width, self.height)
@@ -100,12 +91,6 @@ class Rectangle(Base):
         """
         Update attributes of the Rectangle instance based on given
         positional arguments and/or keyword arguments.
-
-        Args:
-            *args: A list of values to update the attributes in order:
-                1st - id, 2nd - width, 3rd - height, 4th - x, 5th - y.
-            **kwargs: Keyword arguments representing attributes
-                to be updated with their corresponding values.
         """
         if args:
             attributes = ['id', 'width', 'height', 'x', 'y']

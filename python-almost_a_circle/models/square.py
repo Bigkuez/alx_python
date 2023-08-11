@@ -22,10 +22,7 @@ class Square(Rectangle):
     @property
     def size(self):
         """
-        Get the size of the square's sides.
-
-        Returns:
-            int: The size of the square.
+        size of the square's sides.
         """
         return self.width
 
@@ -33,9 +30,6 @@ class Square(Rectangle):
     def size(self, value):
         """
         Set the size of the square's sides.
-
-        Args:
-            value (int): The new size for the square's sides.
         """
         self.width = value
         self.height = value
@@ -43,9 +37,6 @@ class Square(Rectangle):
     def __str__(self):
         """
         Return a string representation of the Square instance.
-
-        Returns:
-            str: The formatted string representing the Square.
         """
         return "[Square] ({}) {}/{} - {}".format(
             self.id, self.x, self.y, self.width)
