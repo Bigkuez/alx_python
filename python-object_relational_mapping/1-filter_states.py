@@ -20,8 +20,7 @@ def list_states_with_N(username, password, database):
         cursor = db.cursor()
 
         # Execute the query to retrieve the states with names starting with 'N'
-        cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' "
-                        "ORDER BY id ASC")
+        cursor.execute("SELECT * FROM states WHERE name LIKE 'N%'"" ORDER BY id ASC")
 
         # Fetch all the results
         results = cursor.fetchall()
