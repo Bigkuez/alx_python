@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
 
+# Import statements should be preceded by two blank lines
 import sys
-
-
 import MySQLdb
 
 def list_states_with_N(username, password, database):
