@@ -1,12 +1,8 @@
 #!/usr/bin/python3
-
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 import sys
-
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
@@ -22,12 +18,14 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query all State objects and order them by ID
-    states = session.query(State).order_by(State.id).all()
+    # Query the first State object ordered by ID using LIMIT 1
+    first_state = session.query(State).order_by(State.id).limit(1).all()
 
-    # Display the results
-    for state in states:
-        print("{}: {}".format(state.id, state.name))
+    # Display the result
+    if first_state:
+        print("{}: {}".format(first_state[0].id, first_state[0].name))
+    else:
+        print("Nothing")
 
     # Close the session
     session.close()
