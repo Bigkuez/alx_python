@@ -18,7 +18,7 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_with_text(text):
-    text = unquote(text)  # Replace underscores with spaces
+    text = text.replace('_', ' ')  # Replace underscores with spaces
     return 'C {}'.format(text)
 
 if __name__ == '__main__':
