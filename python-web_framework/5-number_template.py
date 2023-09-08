@@ -37,6 +37,8 @@ def number(n):
     else:
         return '', 404
     
+    
+    
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     if isinstance(n, int):
