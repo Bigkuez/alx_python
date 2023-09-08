@@ -1,3 +1,24 @@
+#!/usr/bin/python3
+
+"""
+Basic Flask server with routes.
+
+This script defines a Flask web application with several routes to display messages and templates.
+
+Routes:
+- '/' displays a greeting message.
+- '/hbnb' displays "HBNB".
+- '/c/<text>' displays "C" followed by the value of the text variable.
+- '/python/' and '/python/<text>' display "Python" followed by the value of the text variable (default is 'is cool').
+- '/number/<int:n>' displays "<n> is a number" only if n is an integer.
+- '/number_template/<int:n>' displays an HTML page with an H1 tag containing "Number: n" if n is an integer.
+- '/number_odd_or_even/<int:n>' displays an HTML page with an H1 tag indicating whether n is even or odd.
+
+You must use the option strict_slashes=False in your route definitions.
+
+Usage:
+- Run this script to start the Flask web application.
+"""
 
 from flask import Flask, render_template
 
