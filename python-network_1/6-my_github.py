@@ -1,34 +1,15 @@
 #!/usr/bin/python3
+"""Uses the GitHub API to display a GitHub ID based on given credentials.
+
+Usage: ./10-my_github.py <GitHub username> <GitHub password>
+  - Uses Basic Authentication to access the ID.
 """
-get_user_id.py - Retrieve GitHub user ID using Basic Authentication with a personal access token.
-"""
-import requests
 import sys
-import base64
+import requests
+from requests.auth import HTTPBasicAuth
 
-def get_user_id(username, personal_access_token):
-    url = f"https://api.github.com/users/{username}"
-    headers = {
-        "Authorization": f"Basic {base64.b64encode(f'{username}:{personal_access_token}'.encode()).decode()}"
-    }
-
-    try:
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            return response.json().get("id")
-        else:
-            return None
-    except requests.exceptions.RequestException as e:
-        return f"An error occurred: {e}"
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python get_user_id.py <username> <personal_access_token>")
-    else:
-        username = sys.argv[1]
-        personal_access_token = sys.argv[2]
-        user_id = get_user_id(username, personal_access_token)
-        if user_id:
-            print(f"GitHub User ID for {username}: {user_id}")
-        else:
-            print("Failed to retrieve user ID.")
+    auth = HTTPBasicAuth(sys.argv[1], sys.argv[2])
+    r = requests.get("https://api.github.com/user", auth=auth)
+    print(r.json().get("id"))
