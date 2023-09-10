@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-BaseGeometry = __import__('3-base_geometry').BaseGeometry
+"""
+Module consists of an empty class BaseGeometry.
+"""
 
-bg = BaseGeometry()
-
-print(dir(bg))
+class BaseGeometry:
+    """An empty class"""
+    pass
