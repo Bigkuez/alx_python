@@ -1,18 +1,16 @@
 #!/usr/bin/python3
 """
-    get_user_id a URL.
+get_user_id.py - Retrieve GitHub user ID using Basic Authentication with a personal access token.
 """
 import requests
 import sys
-"""
-    get_user_id a URL.
-"""
-def get_user_id(username, password):
-    """
-    Uses the GitHub API to get the user id using Basic Authentication with a personal access token.
-    """
-    url = "https://api.github.com/ahimmii"
-    headers = {"Authorization": f"Basic {username}:{password}"}
+import base64
+
+def get_user_id(username, personal_access_token):
+    url = f"https://api.github.com/users/{username}"
+    headers = {
+        "Authorization": f"Basic {base64.b64encode(f'{username}:{personal_access_token}'.encode()).decode()}"
+    }
 
     try:
         response = requests.get(url, headers=headers)
@@ -25,9 +23,12 @@ def get_user_id(username, password):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python 6-my_github.py <username> <password>")
+        print("Usage: python get_user_id.py <username> <personal_access_token>")
     else:
         username = sys.argv[1]
-        password = sys.argv[2]
-        user_id = get_user_id(username, password)
-        print(user_id)
+        personal_access_token = sys.argv[2]
+        user_id = get_user_id(username, personal_access_token)
+        if user_id:
+            print(f"GitHub User ID for {username}: {user_id}")
+        else:
+            print("Failed to retrieve user ID.")
