@@ -10,4 +10,4 @@ def fibonacci_sequence(n):
         while len(fib_sequence) <= n:
             next_term = fib_sequence[-1] + fib_sequence[-2]
             fib_sequence.append(next_term)
-        return fib_sequence[:-1]  # Exclude the last term
+        return fib_sequence[:-1] if n > 1 else [0]  # Exclude the last term if n > 1, else return [0]
