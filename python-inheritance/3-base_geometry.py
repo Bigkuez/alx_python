@@ -1,5 +1,9 @@
+#!/usr/bin/python3
+"""
+Module consists of an empty class BaseGeometry.
+"""
+
+
 class BaseGeometry:
-    """
-    BaseGeometry is an empty class that serves as a base for geometry-related classes.
-    """
+    """An empty class"""
     pass
