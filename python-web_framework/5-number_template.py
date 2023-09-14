@@ -1,50 +1,68 @@
-#!/usr/bin/python3
 """
-basic flask server 
+This is a simple Flask web application.
 """
-from flask import Flask , render_template
 
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/', strict_slashes=False)
+@app.route("/", strict_slashes=False)
 def hello_hbnb():
-    return 'Hello HBNB!'
+    """
+    Route handler for the root URL "/". Displays a greeting message.
 
+    Returns:
+    str: A string containing the greeting message "Hello HBNB!".
+    """
+    return "Hello HBNB!"
 
-
-@app.route('/hbnb', strict_slashes=False)
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    return 'HBNB'
+    """
+    Route handler for the root URL "/hbnb". Displays a string.
 
+    Returns:
+    str: A string containing the greeting message "HBNB".
+    """
+    return "HBNB"
 
-@app.route('/c/<text>', strict_slashes=False)
-def c_with_text(text):
-    text = text.replace('_', ' ')  # Replace underscores with spaces
-    return 'C {}'.format(text)
+@app.route("/c/<text>", strict_slashes=False)
+def c_text(text):
+    """
+    Route handler for the root URL "/c/<text>". Displays a string.
 
+    Returns:
+    str: A string containing the greeting message "C " + text.
+    """
+    return "C " + text.replace("_", " ")
 
-@app.route('/python/', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python_with_text(text="is cool"):
-    text = text.replace('_', ' ')  # Replace underscores with spaces
-    return 'Python {}'.format(text)
+@app.route("/python/", defaults={"text": "is cool"}, strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def python_text(text):
+    """
+    Route handler for the root URL "/python/(<text>)". Displays a string.
 
-@app.route('/number/<int:n>', strict_slashes=False)
+    Returns:
+    str: A string containing the greeting message "Python " + text.
+    """
+    return "Python " + text.replace("_", " ")
+
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    if isinstance(n, int):
-        return '{} is a number'.format(n)
-    else:
-        return '', 404
-    
-    
-    
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def number_template(n):
-    if isinstance(n, int):
-        return f'<html><body><h1>Number: {n}</h1></body></html>'
-    else:
-        return '', 404
+    """
+    Route handler for the root URL "/number/<n>". Displays a string.
+    """
+    return f"{n} is a number"
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+@app.route("/number_template/<int:n>", strict_slashes=False)
+def number_template(n):
+    """
+    Route handler for the root URL "/number_template/<n>". Displays a string.
+    """
+    return render_template("5-number.html", number=n)
+
+if __name__ == "__main__":
+    """
+    Start the Flask web application.
+    """
+    app.run(host="0.0.0.0", port=5000)
