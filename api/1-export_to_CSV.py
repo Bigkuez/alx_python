@@ -1,8 +1,19 @@
-import requests
-import csv
-import sys
+# Import necessary libraries
+import requests  # Used to make HTTP requests to the API
+import csv       # Used to work with CSV files
+import sys       # Used to access command-line arguments
 
 def get_employee_info(employee_id):
+    """
+    Retrieves employee information and their TODO list from a REST API,
+    then exports the data to a CSV file.
+
+    Args:
+        employee_id (int): The ID of the employee whose data is to be retrieved.
+
+    Returns:
+        None
+    """
     # Define API endpoints
     base_url = "https://jsonplaceholder.typicode.com"
     user_endpoint = f"{base_url}/users/{employee_id}"
