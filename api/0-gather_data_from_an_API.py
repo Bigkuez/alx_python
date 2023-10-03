@@ -25,14 +25,11 @@ def get_employee_info(employee_id):
     total_tasks = len(todos_data)
     done_tasks = sum(1 for task in todos_data if task.get("completed"))
 
-    # Display employee TODO list progress with a specific format
-    output = []
-    output.append(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
+    # Display employee TODO list progress
+    print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
     for task in todos_data:
         if task.get("completed"):
-            output.append(f"\t{task.get('title')}")
-
-    return "\n".join(output)
+            print(f"\t{task.get('title')}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -44,10 +41,6 @@ if __name__ == "__main__":
     try:
         # Ensure employee_id is an integer
         employee_id = int(employee_id)
-        result = get_employee_info(employee_id)
-        if len(result) == 244:
-            print(result)
-        else:
-            print("Output length does not match the expected length of 244 characters.")
+        get_employee_info(employee_id)
     except ValueError:
         print("Employee ID must be an integer.")
