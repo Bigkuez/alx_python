@@ -1,19 +1,8 @@
-# Import necessary libraries
-import requests  # Used to make HTTP requests to the API
-import csv       # Used to work with CSV files
-import sys       # Used to access command-line arguments
+import requests
+import sys
+import csv
 
 def get_employee_info(employee_id):
-    """
-    Retrieves employee information and their TODO list from a REST API,
-    then exports the data to a CSV file.
-
-    Args:
-        employee_id (int): The ID of the employee whose data is to be retrieved.
-
-    Returns:
-        None
-    """
     # Define API endpoints
     base_url = "https://jsonplaceholder.typicode.com"
     user_endpoint = f"{base_url}/users/{employee_id}"
@@ -49,7 +38,7 @@ def get_employee_info(employee_id):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 gather_data_and_export_to_csv.py <employee_id>")
+        print("Usage: python3 1-export_to_CSV.py <employee_id>")
         sys.exit(1)
 
     employee_id = sys.argv[1]
