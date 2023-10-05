@@ -25,11 +25,11 @@ def get_employee_info(employee_id):
     total_tasks = len(todos_data)
     done_tasks = sum(1 for task in todos_data if task.get("completed"))
 
-    # Display employee TODO list progress
+    # Print employee name and task details
     print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
     for task in todos_data:
         if task.get("completed"):
-            print(f"\t{task.get('title')}")
+            print(f"     {task.get('title')}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
