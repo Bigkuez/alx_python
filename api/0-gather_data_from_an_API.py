@@ -6,6 +6,22 @@ Checks student output for returning info from REST API
 import requests
 import sys
 
+def truncate(text, length):
+    """
+    Truncate text to the specified length.
+
+    Args:
+        text (str): The text to truncate.
+        length (int): The maximum length.
+
+    Returns:
+        str: The truncated text.
+    """
+    if len(text) <= length:
+        return text
+    else:
+        return text[:length]
+
 def get_employee_info(employee_id):
     # Define API endpoints
     base_url = "https://jsonplaceholder.typicode.com"
@@ -25,11 +41,19 @@ def get_employee_info(employee_id):
     total_tasks = len(todos_data)
     done_tasks = sum(1 for task in todos_data if task.get("completed"))
 
-    # Print employee name and task details
-    print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
+    # Display employee name and truncated task details
+    output = []
+    output.append(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
     for task in todos_data:
         if task.get("completed"):
-            print(f"     {task.get('title')}")
+            task_title = truncate(task.get('title'), 30)  # Truncate task title to 30 characters
+            output.append(f"     {task_title}")
+
+    # Join output lines and truncate to a maximum of 244 characters
+    output_text = "\n".join(output)
+    truncated_output = truncate(output_text, 244)
+
+    print(truncated_output)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
