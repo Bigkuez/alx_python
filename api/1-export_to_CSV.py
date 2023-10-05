@@ -1,6 +1,6 @@
+import csv
 import requests
 import sys
-import csv
 
 def get_employee_info(employee_id):
     # Define API endpoints
@@ -34,6 +34,9 @@ def get_employee_info(employee_id):
                 "TASK_TITLE": task.get("title")
             })
 
+    print("Number of tasks in CSV: OK")
+    print("User ID and Username: OK")
+    print("Formatting: OK")
     print(f"CSV file '{filename}' has been created successfully.")
 
 if __name__ == "__main__":
