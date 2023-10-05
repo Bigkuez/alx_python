@@ -1,3 +1,4 @@
+import os
 import csv
 import requests
 import sys
@@ -37,7 +38,10 @@ def get_employee_info(employee_id):
     print("Number of tasks in CSV: OK")
     print("User ID and Username: OK")
     print("Formatting: OK")
-    print(f"CSV file '{filename}' has been created successfully.")
+    if os.path.exists(filename):
+        print(f"CSV file '{filename}' has been created successfully.")
+    else:
+        print(f"CSV file '{filename}' was not created.")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
