@@ -6,3 +6,5 @@ Module consists of an empty class BaseGeometry.
 class BaseGeometry:
     """An empty class"""
     pass
+bg = BaseGeometry()
+print(dir(bg))
