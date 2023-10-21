@@ -1,41 +1,51 @@
-#!/usr/bin/python3
 """
-    python script that exports data in the CSV format
-"""
+This script uses an API to retrieve employee task information
+and display in a special format.
 
+It retrieves employees name, task completed with their titles.
+"""
 import csv
-import json
 import requests
-from sys import argv
+import sys
 
-
+# No execution of this file when imported
 if __name__ == "__main__":
-    """
-        request user info by employee ID
-    """
-    request_employee = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}/'.format(argv[1]))
-    """
-        convert json to dictionary
-    """
-    user = json.loads(request_employee.text)
+    
+# Pass employee id on command line
+    id = sys.argv[1]
 
-    username = user.get("username")
+# APIs 
+    userTodoURL = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    userProfile = "https://jsonplaceholder.typicode.com/users/{}".format(id)
 
-    request_todos = requests.get(
-        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(argv[1]))
+# Make requests on APIs
+    todoResponse = requests.get(userTodoURL)
+    profileResponse = requests.get(userProfile)
 
-    tasks = {}
+# Parse responses and store in variables
+    todoJson_Data = todoResponse.json()
+    profileJson_Data = profileResponse.json()
 
-    user_todos = json.loads(request_todos.text)
+#Get employee information
+    employeeName = profileJson_Data['username']
 
-    for dictionary in user_todos:
-        tasks.update({dictionary.get("title"): dictionary.get("completed")})
+    dataList = []
 
-    """
-        export to CSV
-    """
-    with open('{}.csv'.format(argv[1]), mode='w') as file:
-        file_editor = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
-        for k, v in tasks.items():
-            file_editor.writerow([argv[1], username, v, k])
+    for data in todoJson_Data:
+        dataDict = {"userId":data['userId'], "name":employeeName, "completed":data['completed'], "title":data['title']}
+        dataList.append(dataDict)
+
+    # Specify the CSV file path
+    csv_file_path = '{}.csv'.format(todoJson_Data[0]['userId'])
+
+    # Define the field names (column headers)
+    fieldnames = ["userId", "name", "completed", "title"]
+
+    # Open the CSV file in write mode
+    with open(csv_file_path, 'w', newline='') as csv_file:
+        # Create a CSV writer
+        csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+
+        # Write the data rows
+        for row in dataList:
+            csv_writer.writerow(row)
